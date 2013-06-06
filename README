@@ -1,0 +1,15 @@
+### To run
+
+    git clone https://github.com/robotmay/pingdom_pi.git
+    cd pingdom_pi
+    bundle
+
+Next you'll need to set these environment vars in a .env file:
+
+    PINGDOM_USERNAME=foo
+    PINGDOM_PASSWORD=password
+    PINGDOM_API_KEY=something
+
+And finally
+
+    foreman start
