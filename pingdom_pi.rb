@@ -12,6 +12,7 @@ module PingdomPi
 		def initialize(auth = {}, options = {})
 			@client = Client.new(auth)
 			@options = options
+			@file_path = File.expand_path(@options[:file])
 		end
 
 		def checks
@@ -40,8 +41,7 @@ module PingdomPi
 
 		def notify(colour = "000")
 			p "Notifying #{colour}"
-			path = File.expand_path(@options[:file])
-			File.open(path, "w") { |f| f.write colour }
+			File.open(@file_path, "w") { |f| f.write(colour) }
 			p "Colour written to #{path}"
 		end
 	end
@@ -79,8 +79,8 @@ monitor = PingdomPi::Monitor.new({
 	api_key: ENV['PINGDOM_API_KEY']
 }, {
 	response_time: [
-		{ range: 1...700, colour: "010" },
-		{ range: 700...1500, colour: "011" },
+		{ range: 1...700, colour: "020" },
+		{ range: 700...1500, colour: "010" },
 		{ range: 1500...5000, colour: "220" },
 		{ range: 5000..100000, colour: "200" }
 	],
